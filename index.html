@@ -1,0 +1,480 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Introduction to Version Control with Git</title>
+
+		<meta name="description" content="A brief introduction to the basics of revision control using Git">
+		<meta name="author" content="David Myers, Zackary Lowery">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<link rel="stylesheet" href="css/reveal.min.css">
+		<link rel="stylesheet" href="css/theme/default.css" id="theme">
+		<link rel="stylesheet" href="css/theme/git-intro.css">
+
+		<!-- For syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- If the query includes 'print-pdf', include the PDF print sheet -->
+		<script>
+			if( window.location.search.match( /print-pdf/gi ) ) {
+				var link = document.createElement( 'link' );
+				link.rel = 'stylesheet';
+				link.type = 'text/css';
+				link.href = 'css/print/pdf.css';
+				document.getElementsByTagName( 'head' )[0].appendChild( link );
+			}
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+				<section>
+					
+					<h1>
+						<img class="fRight borderless" src="img/git-logo.png" alt="Git Logo">
+						Introduction to Version Control with Git
+					</h1>
+					<p>
+						<small>
+							Presented by
+							<a href="https://github.com/xcjs">
+								Zackary Lowery
+							</a>							
+							and
+							<a href="https://github.com/drmyersii">
+								David Myers
+							</a>
+							at
+							<a href="https://townhack.co">
+								Town Hack Columbus
+							</a>
+							2014
+						</small>
+					</p>
+					<p>
+						<small>
+							This presentation is available online at
+							<a href="https://townhack.github.io/git-101">
+								https://townhack.github.io/git-101
+							</a>
+						</small>
+					</p>
+					<aside class="notes">
+						<p>
+							Have all related sites up before presenting.
+						</p>
+						<p>
+							Introduce myself and how I use Git professionally. 
+							Tie Git use into the Hackathon over the weekend.
+						</p>
+						<p>
+							Mention reveal.js and how it works (press space to 
+							move forward through presentation). Maybe bring up
+							the Github page?
+						</p>  
+						<p>
+							Also, ask the following questions:
+						</p>
+						<p>
+							Have you ever...
+						</p>
+						<ul>
+							<li>...shared code on a Flash driver?</li>
+							<li>...accidentally closed a file before you could hit undo?</li>
+							<li>used Dropbox for projects?</li>
+							<li>...emailed yourself a file?</li>
+							<li>...needed to prove that a fellow classmate did no work during a group project?</li>
+						</ul>
+					</aside>
+				</section>
+
+				<section>
+					<h2>
+						Our Audience
+					</h2>
+					<div class="col">
+						<h3>
+							Developers who are...
+						</h3>
+						<ul>
+							<li>
+								...new to source control
+							</li>
+							<li>
+								...new to Git
+							</li>
+							<li>
+								...know a little about Git, but want to know more
+							</li>
+						</ul>
+					</div>
+					<div class="col">
+						<img src="img/audience.jpg" alt="Audience Photo" style="width: 400px;">
+						<small class="smaller" style="width: 400px;">
+							Photo courtesy of 
+							<a href="https://www.flickr.com/photos/tattoodjay/">
+								J J on Flickr
+							</a>
+							via the
+							<a href="https://creativecommons.org/licenses/by-nc-nd/2.0/">
+								Creative Commons Attribution-NonCommercial-NoDerivs 2.0 Generic 
+							</a>
+							license
+						</small>
+					</div>					
+
+					<aside class="notes">
+						Make verbal note that anyone is welcome to listen in, of course.
+					</aside>
+				</section>
+
+				<section>
+					<section>
+						<h2>
+							Why use source control?
+						</h2>
+						<div class="col">
+							<ul>
+								<li>
+									Allows developers to work in teams effectively
+								</li>
+								<li>
+									Tracks file history over time
+								</li>
+								<li>
+									Allows for diverging branches of code
+								</li>
+								<li>
+									Allows for different changesets or branches to be merged
+								</li>
+							</ul>
+						</div>
+						<div class="col">
+							<img style="width: 400px;" src="img/collaboration.jpg" alt="Two Developers Collaborating">
+							<small class="smaller" style="width: 400px;">
+								Photo courtesy of 
+								<a href="https://www.flickr.com/photos/yourdon/">
+									Ed Yourdon on Flickr
+								</a>
+								via the
+								<a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">
+									Attribution-NonCommercial-ShareAlike 2.0 Generic 
+								</a>
+								license
+							</small>
+						</div>						
+					</section>
+
+					<section>
+						<h2>Why Use Git?</h2>
+						<div class="col">
+							<ul>
+								<li>
+									Encourages frequent commits
+								</li>
+								<li>
+									Branching is a first class operation
+								</li>
+								<li>
+									Provides an entire local copy of the repository
+								</li>
+								<li>
+									Access to a large community of open source
+									projects
+								</li>
+								<li>
+									Access to services such as 
+									<a href="https://github.com/">
+										Github
+									</a>
+									and
+									<a href="https://bitbucket.org/">
+										Bitbucket
+									</a>									
+								</li>
+							</ul>
+						</div>
+						<div class="col">
+							<img class="borderless" style="width: 300px;" src="img/git-branch.png" alt="Git Branch Symbol">
+							<small class="smaller" style="width: 300px;">
+								Image courtesy of 
+								<a href="http://commons.wikimedia.org/wiki/File:Octicons-git-branch.svg">
+									GitHub via WikiMedia Commons
+								</a>
+								via the
+								<a href="http://commons.wikimedia.org/wiki/Category:Expat/MIT_License">
+									MIT
+								</a>
+								license
+							</small>
+						</div>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Getting Started</h2>
+						<h3>Where Do I Get Git?</h3>
+						<table>
+							<tbody>
+								<tr>
+									<td class="nowrap">
+										<img class="borderless" src="img/windows.png" alt="Microsoft Windows Logo" style="vertical-align: middle; width: 40px;">
+										Windows
+									</td>
+									<td>
+										Download the installer from 
+										<a href="http://git-scm.com/download/win">
+											http://git-scm.com/download/win
+										</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="nowrap">
+										<img class="borderless" src="img/mac.png" alt="Mac OS X Logo" style="vertical-align: middle; width: 40px;">
+										Mac OS X &gt;=10.9
+									</td>
+									<td>
+										Attempting to run git from the terminal
+										for the first time will prompt you to
+										install the XCode Command Line Tools
+									</td>
+								</tr>
+								<tr>
+									<td class="nowrap">
+										<img class="borderless" src="img/mac.png" alt="Mac OS X Logo" style="vertical-align: middle; width: 40px;">
+										Mac OS X &lt;10.9
+									</td>
+									<td>
+										Download the installer from
+										<a href="http://git-scm.com/download/mac">
+											 http://git-scm.com/download/mac
+										</a>
+									</td>
+								</tr>
+								<tr>
+									<td class="nowrap">
+										<img class="borderless" src="img/linux.png" alt="Linux Penguin Logo" style="vertical-align: middle; width: 40px;">
+										Linux
+									</td>
+									<td>
+										Install using your distribution's
+										package manager
+									</td>
+								</tr>
+							</tbody>
+						</table>
+						<aside class="notes">
+							Mention that David (and if a large turnout, myself)
+							can help with downloading and installing Git.
+						</aside>
+					</section>
+
+					<section>
+						<h3>Let's clone a repository!</h3>
+						<pre><code data-trim class="bash">
+							git clone https://github.com/TownHack/git-101.git
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>Make a Change...</h3>
+						<h4>index.html, Line 52</h4>
+						<pre><code data-trim class="html">
+&lt;p&gt;
+	&lt;small&gt;
+		Presented by {{Your Name Here}}
+		at
+		&lt;a href="https://townhack.co"&gt;
+			Town Hack Columbus
+		&lt;/a&gt;
+		2014
+	&lt;/small&gt;
+&lt;/p&gt;
+						</code></pre>
+					</section>
+
+					<section>
+						<h3>...Wait, That's Not Right - Revert That!</h3>
+						<pre><code data-trim class="bash">
+git checkout index.html
+						</code></pre>
+						<aside class="notes">
+							This would be a good time to mention tab-completion
+							and mention the diversity of the checkout command.
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Starting From Scratch</h2>
+						<pre><code data-trim class="bash">
+mkdir myproject
+cd myproject
+git init
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>Add Your Changes</h2>
+						<pre><code data-trim class="bash">
+touch README.md
+git add README.md
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>Where Were We?</h2>
+						<pre><code data-trim class="bash">
+git status
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>Commit Locally</h2>
+						<pre><code data-trim class="bash">
+							git commit -m "Add a README file to myproject"
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>Set Remote</h2>
+						<pre><code data-trim class="bash">
+							git remote add origin https://github.com/&lt;user&gt;/&lt;repo&gt;.git
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>Pull</h2>
+						<pre><code data-trim class="bash">
+							git pull
+						</code></pre>
+					</section>
+
+					<section>
+						<h2>Push Remotely</h2>
+						<pre><code data-trim class="bash">
+							git push
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>When Conflict Occurs</h2>
+						<img src="img/conflict.jpg" alt="Two Dogs Play-Fighting" style="display: block; margin: auto; width: 500px;">
+						<small class="smaller" style="width: 500px;">
+							Photo courtesy of 
+							<a href="http://commons.wikimedia.org/wiki/File:Octicons-git-branch.svg">
+								 Aris Sánchez
+							</a>
+							via the
+							<a href="https://creativecommons.org/licenses/by-nc-sa/2.0/">
+								Attribution-NonCommercial-ShareAlike 2.0 Generic
+							</a>
+							license
+						</small>
+					</section>
+
+					<section>
+						<h3>Definition</h3>
+						<dl>
+							<dt>conflict</dt>
+							<dd>
+								be incompatible or at variance; clash.
+							</dd>
+						</dl>
+					</section>
+
+					<section>
+						<h2>What Does a Conflict Look Like?</h2>
+						<pre><code data-trim>
+The number of planets are
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD
+nine
+=======
+eight
+&gt;&gt;&gt;&gt;&gt;&gt;&gt; branch-name
+.
+						</code></pre>
+						<small class="smaller">
+							Example borrowed from
+							<a href="https://help.github.com/articles/resolving-a-merge-conflict-from-the-command-line/">
+								Github
+							</a>
+						</small>
+						<aside class="notes">
+							Mention that solving a conflict is just like adding,
+							committing, and pushing any other change.
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Branching</h2>
+						<pre><code data-trim class="bash">
+git checkout -b mybranch
+						</code></pre>
+					</section>
+				</section>
+
+				<section>
+					<h2>Questions and Discussion</h2>
+				</section>
+			</div>
+
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.min.js"></script>
+
+		<script>
+
+			// Full list of configuration options available here:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				controls: true,
+				progress: true,
+				history: true,
+				center: true,
+				hideAddressBar: true,
+
+				theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+				transition: Reveal.getQueryHash().transition || 'linear', // default/cube/page/concave/zoom/linear/fade/none
+
+				// Parallax scrolling
+				// parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+				// parallaxBackgroundSize: '2100px 900px',
+
+				// Optional libraries used to extend on reveal.js
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+					{ src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+				]
+			});
+
+		</script>
+
+	</body>
+</html>

@@ -1,0 +1,34 @@
+html, body {
+	font-size: 10px;
+}
+
+.nowrap {
+	white-space: nowrap;	
+}
+
+.reveal h1 {
+	-moz-hyphens: none;
+	text-align: left;
+	word-wrap: normal;
+}
+
+.reveal small.smaller {
+	font-size: 1.5rem;
+}
+
+.reveal .col {
+	display: table-cell;
+	max-width: 50%;
+	padding: 1rem;
+	vertical-align: top;
+}
+
+.reveal .fRight {
+	float: right;
+}
+
+.reveal section img.borderless {
+	background: none;
+	border-width: 0;
+	box-shadow: none;
+}
